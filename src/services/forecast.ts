@@ -1,12 +1,12 @@
 import { StormGlass } from '@src/clients/stormGlass';
-import { Beach, BeachForecast } from './forecast.types';
+import { Beach, BeachForecast, TimeForecast } from './forecast.types';
 
 export class Forecast {
   constructor(protected stormGlass = new StormGlass()) {}
 
   public async processForecastForBeaches(
     beaches: Beach[]
-  ): Promise<BeachForecast[]> {
+  ): Promise<TimeForecast[]> {
     const pointsWithCorrectSources: BeachForecast[] = [];
 
     for (const beach of beaches) {
@@ -26,6 +26,27 @@ export class Forecast {
       pointsWithCorrectSources.push(...enrichedBeachData);
     }
 
-    return pointsWithCorrectSources;
+    return this.mapForecastByTime(pointsWithCorrectSources);
+  }
+
+  private mapForecastByTime(forecast: BeachForecast[]): TimeForecast[] {
+    const forecastByTime: TimeForecast[] = [];
+
+    for (const point of forecast) {
+      const timePoint = forecastByTime.find(
+        (forecastValue) => forecastValue.time === point.time
+      );
+
+      if (timePoint) {
+        timePoint.forecast.push(point);
+      } else {
+        forecastByTime.push({
+          time: point.time,
+          forecast: [point],
+        });
+      }
+    }
+
+    return forecastByTime;
   }
 }
