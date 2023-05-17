@@ -16,11 +16,11 @@ export class SetupServer extends Server {
     this.setupExpress();
     this.setupControllers();
     await this.databaseSetup();
-    await this.close();
   }
 
   private setupExpress(): void {
     this.app.use(bodyParser.json());
+    this.setupControllers();
   }
 
   private setupControllers(): void {
@@ -36,7 +36,6 @@ export class SetupServer extends Server {
   public async close(): Promise<void> {
     await database.close();
   }
-
   public getApp(): Application {
     return this.app;
   }
