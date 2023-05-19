@@ -1,5 +1,19 @@
-import { IBeach } from '@src/services/forecast.types';
 import mongoose, { Model } from 'mongoose';
+
+export enum BeachPosition {
+  S = 'S',
+  E = 'E',
+  W = 'W',
+  N = 'N',
+}
+
+export interface IBeach {
+  name: string;
+  position: BeachPosition;
+  lat: number;
+  lng: number;
+  user: string;
+}
 
 const schema = new mongoose.Schema<IBeach>(
   {
