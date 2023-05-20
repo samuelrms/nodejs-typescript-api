@@ -2,7 +2,7 @@ describe('Users functional test', () => {
   describe('When creating a new user', () => {
     it('should successfully create a new user', async () => {
       const newUser = {
-        nome: 'Samuel',
+        name: 'Samuel',
         email: 'samuel@gmail.com',
         password: '1234',
       };
