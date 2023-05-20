@@ -1,10 +1,10 @@
-import * as HTTPUtil from '@src/utils/request';
+import * as HTTPUtil from '../utils/request';
 import {
   ForeCastPoint,
   StormGlassPoint,
   StormGlassResponse,
 } from './stormGlass.types';
-import { InternalError } from '@src/utils/errors/internal-error';
+import { InternalError } from '../utils/errors/internal-error';
 import config, { IConfig } from 'config';
 
 export class StormGlassUnexpectedResponseError extends InternalError {

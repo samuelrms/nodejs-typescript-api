@@ -1,8 +1,8 @@
-import { StormGlass } from '@src/clients/stormGlass';
+import { StormGlass } from '../clients/stormGlass';
 import { BeachForecast, TimeForecast } from './forecast.types';
-import { InternalError } from '@src/utils/errors/internal-error';
-import { ForeCastPoint } from '@src/clients/stormGlass.types';
-import { IBeach } from '@src/models/beach';
+import { InternalError } from '../utils/errors/internal-error';
+import { ForeCastPoint } from '../clients/stormGlass.types';
+import { IBeach } from '../models/beach';
 
 export class ForecastProcessingInternalError extends InternalError {
   constructor(message: string) {
