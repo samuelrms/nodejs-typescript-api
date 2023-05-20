@@ -49,3 +49,4 @@ typings/
 
 # typescript compiled code
 dist/
+.env

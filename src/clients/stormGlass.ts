@@ -44,14 +44,17 @@ export class StormGlass {
   public async fetchPoints(lat: number, lng: number): Promise<ForeCastPoint[]> {
     try {
       const response = await this.request.get<StormGlassResponse>(
-        `${stormGlassResourceConfig.get(
-          'apiUrl'
-        )}/weather/point?lat=${lat}&lng=${lng}&params=${
+        `${
+          process.env.STORMGLASS_API_URL ||
+          stormGlassResourceConfig.get('apiUrl')
+        }/weather/point?lat=${lat}&lng=${lng}&params=${
           this.stormGlassAPIParams
         }&source=${this.stormGlassAPISource}`,
         {
           headers: {
-            Authorization: stormGlassResourceConfig.get('apiToken'),
+            Authorization:
+              process.env.STORMGLASS_API_TOKEN ||
+              stormGlassResourceConfig.get('apiToken'),
           },
         }
       );
